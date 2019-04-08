@@ -1,0 +1,147 @@
+.bdy {
+    margin: 0px;
+    width: 100%;
+    background: #80f2c4;
+    height: 100vh;
+}
+.header {
+    padding: 10px;
+    background: darkcyan;
+    color: aliceblue;
+    box-shadow: 0px 3px 20px #1c3a25;
+}
+.inpField {
+    box-sizing: border-box;
+    width: 160px;
+    padding: 10px;
+    margin: 5px;
+    border: 2px solid darkgray;
+    border-radius: 6px;
+    text-align: center;
+}
+.inpBttn {
+    box-sizing: border-box;
+    width: 160px; padding: 10px;
+    margin: 5px;
+    border: 2px solid darkgray;
+    border-radius: 6px;
+    background: #329e7a;
+    color: aliceblue;
+    text-align: center;
+}
+.inpTable {
+    width: 200px;
+    padding: 10px;
+    margin: 5px;
+    border: 3px solid darkgray;
+    border-radius: 10px;
+    background: darkcyan;
+}
+
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    background: #57baa3;
+    margin: 15px;
+    border: 2px solid #57baa3;
+    border-radius: 20px;
+    box-shadow: 0px 3px 20px #1c3a25;
+}
+
+.flex_item {
+    height: 600px;
+}
+
+.picture {
+    min-width: 600px;
+    flex-grow: 1;
+}
+
+.input {
+    min-width: 300px;
+    flex-grow: 2;
+    /*background: black;*/
+}
+
+.bttns {
+    border: 2px solid darkcyan;
+    background: darkcyan;
+    color: aliceblue;
+    border-radius: 25px;
+    padding: 15px;
+    width : 50px;
+    text-align: center;
+    outline:none;
+    margin: 2px;
+    box-shadow: 0px 2px 5px #1c3a25;
+
+}
+.bttns_active {
+    border: 2px solid darkcyan;
+    background: aliceblue;
+    color: darkcyan;
+    border-radius: 25px;
+    padding: 15px;
+    width : 50px;
+    text-align: center;
+    outline:none;
+    margin: 2px;
+    /*box-shadow: 0px 0px 0px #1c3a25;*/
+}
+
+.inputXR {
+    border: 5px solid darkcyan;
+    font-family: monospace;
+    color: darkcyan;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 25px;
+    background: #57baa3;
+    box-shadow: inset 0px 4px 10px #1c3a25;
+}
+.inputY{
+    width: 100%;
+    box-sizing: border-box;
+    border: 5px solid darkcyan;
+    background: darkcyan;
+    color: aliceblue;
+    border-radius: 15px;
+    padding: 15px;
+    outline:none;
+    font-size: medium;
+    box-shadow: 0px 2px 10px #1c3a25;
+
+}
+.inputY_failed{
+    width: 100%;
+    box-sizing: border-box;
+    border: 5px solid red;
+    background: darkcyan;
+    color: aliceblue;
+    border-radius: 15px;
+    padding: 15px;
+    outline:none;
+    font-size: medium;
+    box-shadow: 0px 2px 10px #1c3a25;
+
+}
+
+.inputY_failed::placeholder{
+    color: ghostwhite;
+    font-size: medium;
+}
+.change::placeholder {
+    /* WebKit, Blink, Edge */
+    color: ghostwhite;
+    font-size: medium;
+}
+
+.inputSquare {
+    background: darkcyan;
+    border: 1px solid darkcyan;
+    border-radius: 10px;
+    padding : 10px;
+    margin: 20px;
+    box-shadow: 0px 4px 15px #1c3a25;
+}

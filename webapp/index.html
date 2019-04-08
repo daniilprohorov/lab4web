@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-if="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Enter</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body class="bdy">
+<div>
+  <table width="100%" style="padding: 10px; background: darkcyan; color: aliceblue;">
+    <tr>
+      <td width="10%">
+        <a href="index.html">
+          <img src="home.png" height="40" width="40" >
+        </a>
+      </td>
+      <td width="100%" style="text-align: center;">
+          <h1 style="font-family : monospace ">ПРОХОРОВ ДАНИИЛ АНДРЕЕВИЧ ГРУППА P3217 ВАРИАНТ № 31278</h1>
+      </td>
+    </tr>
+  </table>
+</div>
+<div align="center" style="margin-top: 5%">
+  <div id="inp"  class="inpTable">
+    <div >
+      <input v-model="login" placeholder='Логин' class="inpField">
+    </div>
+    <div>
+      <input v-model="password" placeholder='Пароль' class="inpField">
+    </div>
+    <div>
+        <button v-on:click="enter" class="inpBttn" >Вход</button>
+    </div>
+    <div>
+      <button v-on:click="register" class="inpBttn" >Зарегестрироваться</button>
+    </div>
+  </div>
+</div>
+<script>
+
+  var ent = new Vue({
+    el: '#inp',
+    data:{
+      login: '',
+      password: ''
+    },
+    methods:{
+      register: function(){
+        alert("reg");
+      },
+      enter: function(){
+        alert("ent");
+      }
+    }
+  });
+</script>
+</body>
+</html>

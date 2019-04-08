@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-if="http://www.w3.org/1999/xhtml" xmlns:v-for="http://www.w3.org/1999/xhtml"
+      xmlns:v-model="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body class="bdy" v-if="Y.data.setted && buttonsX && buttonsR">
+<div>
+    <table width="100%" class="header">
+        <tr>
+            <td width="10%">
+                <a href="index.html">
+                    <img src="home.png" height="40" width="40" >
+                </a>
+            </td>
+            <td width="100%" style="text-align: center;">
+                <h1 style="font-family : monospace ">ПРОХОРОВ ДАНИИЛ АНДРЕЕВИЧ ГРУППА P3217 ВАРИАНТ № 31278</h1>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="flex">
+    <div class="flex_item picture" align="center">
+        <canvas id = "canvas_id" width="600" height="600" style="margin-top: 10px" ></canvas>
+    </div>
+    <div  class="flex_item input inputSquare">
+        <div class="inputXR">
+            <div align="center">
+                <h1>X</h1>
+            </div>
+            <div id = "lineBttnsX" align="center">
+                <button v-model="x1" class="bttns" :class="{bttns_active: x1}" @click="toggle1">-3</button>
+                <button v-model="x2" class="bttns" :class="{bttns_active: x2}" @click="toggle2">-2</button>
+                <button v-model="x3" class="bttns" :class="{bttns_active: x3}" @click="toggle3">-1</button>
+                <button v-model="x4" class="bttns" :class="{bttns_active: x4}" @click="toggle4">0</button>
+                <button v-model="x5" class="bttns" :class="{bttns_active: x5}" @click="toggle5">1</button>
+                <button v-model="x6" class="bttns" :class="{bttns_active: x6}" @click="toggle6">2</button>
+                <button v-model="x7" class="bttns" :class="{bttns_active: x7}" @click="toggle7">3</button>
+                <button v-model="x8" class="bttns" :class="{bttns_active: x8}" @click="toggle8">4</button>
+                <button v-model="x9" class="bttns" :class="{bttns_active: x9}" @click="toggle9">5</button>
+            </div>
+        </div>
+        <div class="inputXR">
+            <div align="center">
+                <h1>Y</h1>
+            </div>
+            <div id = 'y' >
+               <input maxlength="8" class="inputY change" :class="{inputY_failed : error}" v-model="val" placeholder="Введите Y" @input="validator">
+            </div>
+        </div>
+        <div class="inputXR">
+            <div align="center">
+                <h1>R</h1>
+            </div>
+            <div id = "lineBttnsR" align="center">
+                <button v-model="x1" class="bttns" :class="{bttns_active: x1}" @click="toggle1">-3</button>
+                <button v-model="x2" class="bttns" :class="{bttns_active: x2}" @click="toggle2">-2</button>
+                <button v-model="x3" class="bttns" :class="{bttns_active: x3}" @click="toggle3">-1</button>
+                <button v-model="x4" class="bttns" :class="{bttns_active: x4}" @click="toggle4">0</button>
+                <button v-model="x5" class="bttns" :class="{bttns_active: x5}" @click="toggle5">1</button>
+                <button v-model="x6" class="bttns" :class="{bttns_active: x6}" @click="toggle6">2</button>
+                <button v-model="x7" class="bttns" :class="{bttns_active: x7}" @click="toggle7">3</button>
+                <button v-model="x8" class="bttns" :class="{bttns_active: x8}" @click="toggle8">4</button>
+                <button v-model="x9" class="bttns" :class="{bttns_active: x9}" @click="toggle9">5</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id = "hello">
+    <button @click="getData" value="lol" class="bttns"></button>
+       {{ msg }}
+</div>
+<script>
+    var canvas = document.getElementById('canvas_id');
+    var ctx = canvas.getContext('2d');
+    function printPlot(){
+
+        var height = 600;
+        var width = 600;
+        var onew = width/10;
+        var oneh = height/10;
+        var R = oneh*4;
+        ctx.beginPath();
+        ctx.save();
+
+        ctx.translate(width/2, height/2);
+        ctx.scale(1, -1);
+
+        //Оси
+        ctx.fillStyle = "black";
+        ctx.moveTo(-5*onew, 0);
+        ctx.lineTo(5*onew, 0);
+        ctx.moveTo(0, -5*oneh);
+        ctx.lineTo(0, 5*oneh);
+
+        //Стрелки
+        ctx.moveTo(0, height/2);
+        ctx.lineTo(-4, height/2 - 7);
+        ctx.moveTo(0, height/2);
+        ctx.lineTo(4, height/2 - 7);
+
+        ctx.moveTo(width/2, 0);
+        ctx.lineTo(width/2 - 7, 4);
+        ctx.moveTo(width/2, 0);
+        ctx.lineTo(width/2 - 7, -4);
+
+        //Обозначения
+        ctx.moveTo(-4*onew, -4);
+        ctx.lineTo(-4*onew, 4);
+        ctx.moveTo(-2*onew, -4);
+        ctx.lineTo(-2*onew, 4);
+        ctx.moveTo(4*onew, -4);
+        ctx.lineTo(4*onew, 4);
+        ctx.moveTo(2*onew, -4);
+        ctx.lineTo(2*onew, 4);
+        ctx.moveTo(-4, -4*oneh);
+        ctx.lineTo(4, -4*oneh);
+        ctx.moveTo(-4, -2*oneh);
+        ctx.lineTo(4, -2*oneh);
+        ctx.moveTo(-4, 2*oneh);
+        ctx.lineTo(4, 2*oneh);
+        ctx.moveTo(-4, 4*oneh);
+        ctx.lineTo(4, 4*oneh);
+
+        //Фигура
+        ctx.moveTo(0, 0);
+        ctx.arc(0, 0, R, 3.14/2, 0, true  );
+        ctx.fillStyle = 'darkcyan';
+        ctx.moveTo(-R/2, 0);
+        ctx.lineTo(0, R/2);
+        ctx.lineTo(0, -R);
+        ctx.lineTo(-R/2, -R);
+        ctx.lineTo(-R/2, 0);
+        ctx.fill();
+
+        //Обозначения
+        ctx.fillStyle = 'black';
+        ctx.font = '15pt Arial';
+        ctx.save();
+        ctx.scale(1, -1);
+        ctx.fillText("-R", -onew*4 -12, 23);
+        ctx.fillText("-R/2", -onew*2 - 13, 23);
+        ctx.fillText("R", onew*4 -12, 23);
+        ctx.fillText("R/2", onew*2 - 3, 23);
+        ctx.fillText("X", onew*5 - 15, 23 );
+
+        ctx.fillText("-R",-32, oneh*4 + 5);
+        ctx.fillText("-R/2",-58, oneh*2 + 5 );
+        ctx.fillText("R",-20, -oneh*4 + 5);
+        ctx.fillText("R/2",-46, -oneh*2 + 5);
+        ctx.fillText("Y",-20, -oneh*5 + 15);
+        ctx.restore();
+        ctx.restore();
+        ctx.stroke();
+    }
+    printPlot();
+
+    // Vue.component('btn', {
+    //     props : ['id', 'val', 'pressed'],
+    //     data :
+    //     template: '<button :key = "id" class = "bttns" :class="bttns_active: pressed" @click="toggle" value="val"></button>',
+    // });
+    // var buttonsX2 = new Vue({
+    //   el : '#lineBttnsX2',
+    //   data : {
+    //       items : [
+    //           {id : 0, val : -3, pressed: false},
+    //           {id : 1, val : -2, pressed: false},
+    //           {id : 2, val : -1, pressed: false},
+    //           {id : 3, val :  0, pressed: false},
+    //           {id : 4, val :  1, pressed: false},
+    //           {id : 5, val :  2, pressed: false},
+    //           {id : 6, val :  3, pressed: false},
+    //           {id : 7, val :  4, pressed: false},
+    //           {id : 8, val :  5, pressed: false}
+    //       ]
+    //   },
+    //   methods: {
+    //       toggle : function(item){
+    //           alert(item.id + "toggle!!")
+    //       }
+    //   }
+    // });
+    var buttonsX = new Vue({
+        el: '#lineBttnsX',
+        data: {
+            x1 : false,
+            x2 : false,
+            x3 : false,
+            x4 : false,
+            x5 : false,
+            x6 : false,
+            x7 : false,
+            x8 : false,
+            x9 : false,
+            setted : false,
+            val : 0
+        },
+        methods: {
+            toggle1 : function () {
+                this.val = -3;
+                this.x1 = !this.x1;
+                this.setted = this.x1;
+                this.x2 = false;
+                this.x3 = false;
+                this.x4 = false;
+                this.x5 = false;
+                this.x6 = false;
+                this.x7 = false;
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsR.$data.setted){
+                    setPoint(this.val, parseFloat(Y.$data.val), buttonsR.$data.val)
+                }
+            },
+            toggle2 : function () {
+                this.val = -2;
+                this.x1 = false;
+
+                this.x2 = !this.x2;
+                this.setted = this.x2;
+
+                this.x3 = false;
+                this.x4 = false;
+                this.x5 = false;
+                this.x6 = false;
+                this.x7 = false;
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsR.$data.setted){
+                    setPoint(this.val, parseFloat(Y.$data.val), buttonsR.$data.val)
+                }
+            },
+            toggle3 : function () {
+                this.val = -1;
+                this.x1 = false;
+                this.x2 = false;
+
+                this.x3 = !this.x3;
+                this.setted = this.x3;
+
+                this.x4 = false;
+                this.x5 = false;
+                this.x6 = false;
+                this.x7 = false;
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsR.$data.setted){
+                    setPoint(this.val, parseFloat(Y.$data.val), buttonsR.$data.val)
+                }
+            },
+            toggle4 : function () {
+                this.val = 0;
+                this.x1 = false;
+                this.x2 = false;
+                this.x3 = false;
+
+                this.x4 = !this.x4;
+                this.setted = this.x4;
+
+                this.x5 = false;
+                this.x6 = false;
+                this.x7 = false;
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsR.$data.setted){
+                    setPoint(this.val, parseFloat(Y.$data.val), buttonsR.$data.val)
+                }
+            },
+            toggle5 : function () {
+                this.val = 1;
+                this.x1 = false;
+                this.x2 = false;
+                this.x3 = false;
+                this.x4 = false;
+
+                this.x5 = !this.x5;
+                this.setted = this.x5;
+
+                this.x6 = false;
+                this.x7 = false;
+                this.x8 = false;
+                this.x9 = false;
+
+                if(this.setted && Y.$data.setted && buttonsR.$data.setted){
+                    setPoint(this.val, parseFloat(Y.$data.val), buttonsR.$data.val)
+                }
+            },
+            toggle6 : function () {
+                this.val = 2;
+                this.x1 = false;
+                this.x2 = false;
+                this.x3 = false;
+                this.x4 = false;
+                this.x5 = false;
+
+                this.x6 = !this.x6;
+                this.setted = this.x6;
+
+                this.x7 = false;
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsR.$data.setted){
+                    setPoint(this.val, parseFloat(Y.$data.val), buttonsR.$data.val)
+                }
+            },
+            toggle7 : function () {
+                this.val = 3;
+                this.x1 = false;
+                this.x2 = false;
+                this.x3 = false;
+                this.x4 = false;
+                this.x5 = false;
+                this.x6 = false;
+
+                this.x7 = !this.x7;
+                this.setted = this.x7;
+
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsR.$data.setted){
+                    setPoint(this.val, parseFloat(Y.$data.val), buttonsR.$data.val)
+                }
+            },
+            toggle8 : function () {
+                this.val = 4;
+                this.x1 = false;
+                this.x2 = false;
+                this.x3 = false;
+                this.x4 = false;
+                this.x5 = false;
+                this.x6 = false;
+                this.x7 = false;
+
+                this.x8 = !this.x8;
+                this.setted = this.x8;
+
+                this.x9 = false;
+
+
+
+                if(this.setted && Y.$data.setted && buttonsR.$data.setted){
+                    setPoint(this.val, parseFloat(Y.$data.val), buttonsR.$data.val)
+                }
+
+
+            },
+            toggle9 : function () {
+                this.val = 5;
+                this.x1 = false;
+                this.x2 = false;
+                this.x3 = false;
+                this.x4 = false;
+                this.x5 = false;
+                this.x6 = false;
+                this.x7 = false;
+                this.x8 = false;
+
+                this.x9 = !this.x9;
+                this.setted = this.x9;
+                if(this.setted && Y.$data.setted && buttonsR.$data.setted){
+                    setPoint(this.val, parseFloat(Y.$data.val), buttonsR.$data.val)
+                }
+            }
+        }
+    });
+    var buttonsR = new Vue({
+        el: '#lineBttnsR',
+        data: {
+            x1 : false,
+            x2 : false,
+            x3 : false,
+            x4 : false,
+            x5 : false,
+            x6 : false,
+            x7 : false,
+            x8 : false,
+            x9 : false,
+            setted : false,
+            val : 0
+        },
+        methods: {
+            toggle1 : function () {
+                this.val = -3;
+                this.x1 = !this.x1;
+                this.setted = this.x1;
+
+                this.x2 = false;
+                this.x3 = false;
+                this.x4 = false;
+                this.x5 = false;
+                this.x6 = false;
+                this.x7 = false;
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsX.$data.setted){
+                    setPoint(buttonsR.$data.val, parseFloat(Y.$data.val), this.val)
+                }
+            },
+            toggle2 : function () {
+                this.val = -2;
+                this.x1 = false;
+
+                this.x2 = !this.x2;
+                this.setted = this.x2;
+
+                this.x3 = false;
+                this.x4 = false;
+                this.x5 = false;
+                this.x6 = false;
+                this.x7 = false;
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsX.$data.setted){
+                    setPoint(buttonsR.$data.val, parseFloat(Y.$data.val), this.val)
+                }
+            },
+            toggle3 : function () {
+                this.val = -1;
+                this.x1 = false;
+                this.x2 = false;
+
+                this.x3 = !this.x3;
+                this.setted = this.x3;
+
+                this.x4 = false;
+                this.x5 = false;
+                this.x6 = false;
+                this.x7 = false;
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsX.$data.setted){
+                    setPoint(buttonsR.$data.val, parseFloat(Y.$data.val), this.val)
+                }
+            },
+            toggle4 : function () {
+                this.val = 0;
+                this.x1 = false;
+                this.x2 = false;
+                this.x3 = false;
+
+                this.x4 = !this.x4;
+                this.setted = this.x4;
+
+                this.x5 = false;
+                this.x6 = false;
+                this.x7 = false;
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsX.$data.setted){
+                    setPoint(buttonsR.$data.val, parseFloat(Y.$data.val), this.val)
+                }
+            },
+            toggle5 : function () {
+                this.val = 1;
+                this.x1 = false;
+                this.x2 = false;
+                this.x3 = false;
+                this.x4 = false;
+
+                this.x5 = !this.x5;
+                this.setted = this.x5;
+
+                this.x6 = false;
+                this.x7 = false;
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsX.$data.setted){
+                    setPoint(buttonsR.$data.val, parseFloat(Y.$data.val), this.val)
+                }
+            },
+            toggle6 : function () {
+                this.val = 2;
+                this.x1 = false;
+                this.x2 = false;
+                this.x3 = false;
+                this.x4 = false;
+                this.x5 = false;
+
+                this.x6 = !this.x6;
+                this.setted = this.x6;
+
+                this.x7 = false;
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsX.$data.setted){
+                    setPoint(buttonsR.$data.val, parseFloat(Y.$data.val), this.val)
+                }
+            },
+            toggle7 : function () {
+                this.val = 3;
+                this.x1 = false;
+                this.x2 = false;
+                this.x3 = false;
+                this.x4 = false;
+                this.x5 = false;
+                this.x6 = false;
+
+                this.x7 = !this.x7;
+                this.setted = this.x7;
+
+                this.x8 = false;
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsX.$data.setted){
+                    setPoint(buttonsR.$data.val, parseFloat(Y.$data.val), this.val)
+                }
+            },
+            toggle8 : function () {
+                this.val = 4;
+                this.x1 = false;
+                this.x2 = false;
+                this.x3 = false;
+                this.x4 = false;
+                this.x5 = false;
+                this.x6 = false;
+                this.x7 = false;
+
+                this.x8 = !this.x8;
+                this.setted = this.x8;
+
+                this.x9 = false;
+                if(this.setted && Y.$data.setted && buttonsX.$data.setted){
+                    setPoint(buttonsR.$data.val, parseFloat(Y.$data.val), this.val)
+                }
+            },
+            toggle9 : function () {
+                this.val = 5;
+                this.x1 = false;
+                this.x2 = false;
+                this.x3 = false;
+                this.x4 = false;
+                this.x5 = false;
+                this.x6 = false;
+                this.x7 = false;
+                this.x8 = false;
+
+                this.x9 = !this.x9;
+                this.setted = this.x9;
+                if(this.setted && Y.$data.setted && buttonsX.$data.setted){
+                    setPoint(buttonsR.$data.val, parseFloat(Y.$data.val), this.val)
+                }
+            }
+        }
+    });
+    var Y = new Vue({
+        el: '#y',
+        data : {
+            val : '',
+            setted : false,
+            error : false
+        },
+        methods : {
+            validator: function () {
+                var y = parseFloat(this.val);
+                if (y > -3 && y < 5) {
+                    this.setted = true;
+                    this.error = false;
+                    if (buttonsX.$data.setted && buttonsR.$data.setted) {
+                        setPoint(buttonsX.$data.val, y, buttonsR.$data.val);
+                    }
+                }
+                else{
+                    this.setted = false;
+                    this.error = true;
+                }
+            }
+        }
+    });
+    var hello = new Vue({
+        el: '#hello',
+        data: {
+            msg : ''
+        },
+        methods: {
+            getData : function(){
+                axios.post('api/user/create', {params : {username : "123", password : "321"}})
+                    .then(function(data){
+                        console.log(data);
+                    })
+            }
+        }
+    });
+
+    function setPoint(x, y, r){
+        console.log("kek");
+        var points = {params : {'x':x, 'y':y, 'r':r}};
+        axios.get('api/points/setpoint', points).then(function(data){
+            console.log(data);
+        });
+    }
+</script>
+</body>
+</html>
